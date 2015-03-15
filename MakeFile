@@ -1,0 +1,17 @@
+CPP = g++
+BUILD_DIR = bin/
+SRC_DIR = src/
+COMPILE_FLAGS = -std=c++11
+
+BUILD_OBJ = $(BUILD_DIR)main.o
+
+
+
+all: main.o
+		$(CPP) $(BUILD_OBJ) $(COMPILE_FLAGS) -o $(BUILD_DIR)a.out
+
+main.o: $(SRC_DIR)main.cpp
+				g++ -c $(SRC_DIR)main.cpp $(COMPILE_FLAGS) -o $(BUILD_DIR)main.o
+
+clr:
+		rm $(BUILD_DIR)*.o $(BUILD_DIR)a.out
