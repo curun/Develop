@@ -1,9 +1,19 @@
 #include <iostream>
 
+#include "system.hpp"
+
 
 int main(void)
 {
 
-  std::cout << "Test Compiler" << std::endl;
+  System * system = new System();
+
+  if( system->Init() == ERROR )
+    return 0;
+
+  system->Run();
+
+  system->Destroy();
+  
   return 0;
 }

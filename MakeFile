@@ -1,17 +1,53 @@
 CPP = g++
+
 BUILD_DIR = bin/
 SRC_DIR = src/
-COMPILE_FLAGS = -std=c++11
+INCLUDE_DIR = include/
 
-BUILD_OBJ = $(BUILD_DIR)main.o
+COMPILE_FLAGS = -std=c++11 -lGL -lX11
+
+BUILD_OBJ = $(BUILD_DIR)main.o \
+$(BUILD_DIR)Texture.o \
+$(BUILD_DIR)Graphic.o \
+$(BUILD_DIR)InputManager.o \
+$(BUILD_DIR)ResourceManager.o \
+$(BUILD_DIR)system.o \
+
+OBJ = main.o \
+Texture.o \
+Graphic.o \
+InputManager.o \
+ResourceManager.o \
+system.o \
 
 
 
-all: main.o
-		$(CPP) $(BUILD_OBJ) $(COMPILE_FLAGS) -o $(BUILD_DIR)a.out
+
+all: $(OBJ)
+		$(CPP) $(BUILD_OBJ) $(COMPILE_FLAGS) -o $(BUILD_DIR)a.out -I$(INCLUDE_DIR)
 
 main.o: $(SRC_DIR)main.cpp
-				g++ -c $(SRC_DIR)main.cpp $(COMPILE_FLAGS) -o $(BUILD_DIR)main.o
+	$(CPP) -c $(SRC_DIR)main.cpp $(COMPILE_FLAGS) -o $(BUILD_DIR)main.o -I$(INCLUDE_DIR)
+
+Texture.o: $(SRC_DIR)Texture.cpp
+	$(CPP) -c $(SRC_DIR)Texture.cpp $(COMPILE_FLAGS) -o $(BUILD_DIR)Texture.o -I$(INCLUDE_DIR)
+
+Graphic.o:$(SRC_DIR)Graphic.cpp
+	$(CPP) -c $(SRC_DIR)Graphic.cpp $(COMPILE_FLAGS) -o $(BUILD_DIR)Graphic.o -I$(INCLUDE_DIR)
+
+InputManager.o:$(SRC_DIR)InputManager.cpp
+	$(CPP) -c $(SRC_DIR)InputManager.cpp $(COMPILE_FLAGS) -o $(BUILD_DIR)InputManager.o -I$(INCLUDE_DIR)
+
+ResourceManager.o:$(SRC_DIR)ResourceManager.cpp
+	$(CPP) -c $(SRC_DIR)ResourceManager.cpp $(COMPILE_FLAGS) -o $(BUILD_DIR)ResourceManager.o -I$(INCLUDE_DIR)
+
+Shader.o:$(SRC_DIR)Shader.cpp
+	$(CPP) -c $(SRC_DIR)Shader.cpp $(COMPILE_FLAGS) -o $(BUILD_DIR)Shader.o -I$(INCLUDE_DIR)
+
+system.o:$(SRC_DIR)system.cpp
+	$(CPP) -c $(SRC_DIR)system.cpp $(COMPILE_FLAGS) -o $(BUILD_DIR)system.o -I$(INCLUDE_DIR)
+
+
 
 clr:
 		rm $(BUILD_DIR)*.o $(BUILD_DIR)a.out
